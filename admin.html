@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="config.js"></script>
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#1d0710"><title>Navratri Admin</title>
+<style>
+:root{--bg:#1d0710;--ink:#fff4dc;--gold:#ffc23c;--card:#2a0a14;--line:#ffc23c40}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Noto Sans Devanagari",sans-serif;line-height:1.5;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh}
+button{font:inherit;color:var(--ink);cursor:pointer}
+a{color:var(--gold)}
+.hide{display:none!important}
+/* lock */
+#lock{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.lk{width:min(320px,100%);text-align:center;animation:up .5s both}
+.lk h1{font-size:24px;margin:0 0 4px}.lk p{margin:0 0 18px;opacity:.75;font-size:14px}
+.dots{display:flex;gap:14px;justify-content:center;margin:0 0 22px;height:18px}
+.dots i{width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);transition:background .15s,transform .15s}
+.dots i.f{background:var(--gold);transform:scale(1.15)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pad button{height:64px;width:64px;justify-self:center;border-radius:50%;border:1px solid var(--line);background:#ffffff0a;font-size:24px;transition:background .15s,transform .1s}
+.pad button:active{background:var(--gold);color:#3a0a10;transform:scale(.94)}
+.pad .s{visibility:hidden}
+.shake{animation:sh .4s}
+@keyframes sh{20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#msg{min-height:20px;margin-top:14px;font-size:13px;color:#ff9a9a}
+/* app */
+header{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent);padding:14px 16px 6px}
+.top{display:flex;align-items:center;justify-content:space-between;max-width:720px;margin:auto}
+.top h1{font-size:20px;margin:0}
+.out{border:1px solid var(--line);background:transparent;border-radius:16px;padding:5px 12px;font-size:13px}
+.tabs{display:flex;gap:8px;max-width:720px;margin:10px auto 0;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;border:1px solid var(--line);background:transparent;border-radius:18px;padding:8px 14px;font-size:14px;white-space:nowrap;transition:background .2s,color .2s}
+.tab.on{background:var(--gold);color:#3a0a10;border-color:var(--gold);font-weight:700}
+main{max-width:720px;margin:auto;padding:6px 16px 40px}
+.pane{display:none}.pane.on{display:block;animation:up .35s both}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}
+.card h2{font-size:16px;margin:0 0 10px;color:var(--gold);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-size:11px;padding:2px 9px;border-radius:10px;background:var(--gold);color:#3a0a10;font-weight:600}
+.note{font-size:13px;opacity:.78;margin:6px 0}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{background:#ffffff0d;border-radius:14px;padding:12px 6px;text-align:center;font-size:12px;opacity:1}
+.kpi b{display:block;font-size:26px;color:var(--gold);line-height:1.2}
+.row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:14px}
+.row span:first-child{flex:0 0 38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row span:last-child{flex:0 0 34px;text-align:right}
+.bar{flex:1;height:10px;background:#ffffff15;border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#ff8a00,var(--gold));border-radius:5px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.days{display:flex;align-items:flex-end;gap:8px;height:110px;margin-top:6px}
+.days div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:11px;opacity:.9}
+.days i{display:block;width:100%;background:linear-gradient(0deg,#ff8a00,var(--gold));border-radius:6px 6px 0 0;min-height:3px;transition:height .7s}
+.btn{border:1px solid var(--gold);background:transparent;border-radius:20px;padding:8px 16px;font-size:14px;margin-top:8px}
+.btn.g{background:var(--gold);color:#3a0a10;font-weight:700}
+details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;color:var(--gold);font-size:14px}
+ol,ul{padding-left:20px;margin:8px 0;font-size:13.5px}li{margin:5px 0}
+code{background:#0006;padding:1px 6px;border-radius:6px;font-size:12.5px;word-break:break-all}
+input{width:100%;background:#1d0710;border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:10px;font:inherit;margin:6px 0}
+pre{white-space:pre-wrap;word-break:break-all;background:#0006;padding:10px;border-radius:10px;font-size:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+
+<section id="lock"><div class="lk"><h1>🔐 एडमिन</h1><p>PIN डालें</p><div class="dots" id="dots"><i></i><i></i><i></i><i></i></div>
+<div class="pad" id="pad"></div><div id="msg"></div></div></section>
+
+<section id="app" class="hide">
+<header><div class="top"><h1>🪔 Navratri Admin</h1><button class="out" id="out">🔓 बाहर</button></div>
+<nav class="tabs"><button class="tab on" data-p="all">📊 सबके आँकड़े</button><button class="tab" data-p="me">📱 इस फ़ोन के</button><button class="tab" data-p="help">⚙️ सेटिंग / मदद</button></nav></header>
+<main>
+<div class="pane on" id="p-all"><div class="card"><h2>सब विज़िटर्स <span class="tag">GoatCounter</span></h2><div id="rvb" class="note">…</div></div></div>
+
+<div class="pane" id="p-me"><div class="card"><h2>इस फ़ोन के असली आँकड़े <span class="tag">only this device</span></h2>
+<div id="real"></div><p class="note">ये गिनतियाँ सिर्फ इसी फ़ोन में जमा हैं (नाम, नंबर या लोकेशन नहीं)। दूसरों के आँकड़े "सबके आँकड़े" में दिखेंगे।</p><button class="btn" id="reset">🗑️ इस फ़ोन की गिनती रीसेट करें</button></div></div>
+
+<div class="pane" id="p-help">
+<div class="card"><h2>PIN बदलें</h2><p class="note">नया PIN लिखें, नीचे बनी लाइन <code>admin.html</code> में <code>PIN_HASH</code> की जगह चिपकाएँ और साइट दोबारा अपलोड करें।</p>
+<input id="np" type="password" inputmode="numeric" maxlength="8" placeholder="नया PIN (4–8 अंक)"><button class="btn g" id="mk">लाइन बनाएँ</button><pre id="ph" class="hide"></pre></div>
+<div class="card"><h2>सच बताऊँ तो</h2><p class="note">यह PIN एक हल्का ताला है, पक्की सुरक्षा नहीं: साइट GitHub Pages जैसी स्टैटिक है, इसलिए कोई तकनीकी व्यक्ति इसे पार कर सकता है। इस पेज में कोई गुप्त जानकारी नहीं है, सिर्फ गिनतियाँ हैं। असली लॉगिन चाहिए तो Firebase Authentication लगता है।</p></div>
+<div class="card"><h2>खोलने का तरीका</h2><p class="note">साइट के शीर्षक "जय माता दी" पर 7 बार जल्दी-जल्दी टैप करें, फिर PIN डालें।</p></div>
+</div>
+</main></section>
+
+<script>
+const PIN_HASH="36292eba350d769a348c045707eb6dbe2861359b12d54c70630dc9fee89cd500";
+const $=id=>document.getElementById(id);
+/* --- small SHA-256 (works on http/file too) --- */
+function sha256(s){const K=[],H=[];let p=2,c=0;const g=x=>(x-(x|0))*4294967296|0;for(;c<64;p++){let q=1;for(let i=2;i*i<=p;i++)if(p%i==0){q=0;break;}if(q){if(c<8)H[c]=g(Math.pow(p,.5));K[c++]=g(Math.pow(p,1/3));}}
+ const u=unescape(encodeURIComponent(s)),L=u.length,w=[];for(let i=0;i<L;i++)w[i>>2]|=u.charCodeAt(i)<<(24-(i%4)*8);w[L>>2]|=128<<(24-(L%4)*8);w[((L+8>>6)+1)*16-1]=L*8;
+ let h=H.slice(0,8);for(let o=0;o<w.length;o+=16){const a=w.slice(o,o+16),x=[];for(let i=0;i<64;i++){if(i<16)x[i]=a[i]|0;else{const s0=(x[i-15]>>>7|x[i-15]<<25)^(x[i-15]>>>18|x[i-15]<<14)^(x[i-15]>>>3),s1=(x[i-2]>>>17|x[i-2]<<15)^(x[i-2]>>>19|x[i-2]<<13)^(x[i-2]>>>10);x[i]=(x[i-16]+s0+x[i-7]+s1)|0;}}
+  let [A,B,C,D,E,F,G,Hh]=h;for(let i=0;i<64;i++){const S1=(E>>>6|E<<26)^(E>>>11|E<<21)^(E>>>25|E<<7),ch=(E&F)^(~E&G),t1=(Hh+S1+ch+K[i]+x[i])|0,S0=(A>>>2|A<<30)^(A>>>13|A<<19)^(A>>>22|A<<10),mj=(A&B)^(A&C)^(B&C),t2=(S0+mj)|0;Hh=G;G=F;F=E;E=(D+t1)|0;D=C;C=B;B=A;A=(t1+t2)|0;}
+  h=[h[0]+A|0,h[1]+B|0,h[2]+C|0,h[3]+D|0,h[4]+E|0,h[5]+F|0,h[6]+G|0,h[7]+Hh|0];}
+ return h.map(v=>(v>>>0).toString(16).padStart(8,"0")).join("");}
+const hp=p=>sha256("navratri-admin:"+p);
+
+/* --- lock screen --- */
+let pin="",bad=0,until=0;
+"123456789 0⌫".split("").forEach(k=>{const b=document.createElement("button");b.textContent=k===" "?"":k;if(k===" ")b.className="s";else b.onclick=()=>press(k);$("pad").appendChild(b);});
+function draw(){[...$("dots").children].forEach((d,i)=>d.classList.toggle("f",i<pin.length));}
+function press(k){if(Date.now()<until){$("msg").textContent="थोड़ी देर बाद कोशिश करें";return;}
+ if(k==="⌫"){pin=pin.slice(0,-1);draw();return;}if(pin.length>=4)return;pin+=k;draw();
+ if(pin.length===4){setTimeout(()=>{if(hp(pin)===PIN_HASH){try{sessionStorage.setItem("nav_adm","1");}catch(e){}open_();}
+  else{bad++;pin="";draw();$("msg").textContent="गलत PIN";$("dots").classList.add("shake");setTimeout(()=>$("dots").classList.remove("shake"),420);if(bad>=5){until=Date.now()+30000;bad=0;$("msg").textContent="5 गलत कोशिशें — 30 सेकंड रुकें";}}},120);}}
+addEventListener("keydown",e=>{if($("lock").classList.contains("hide"))return;if(/^[0-9]$/.test(e.key))press(e.key);else if(e.key==="Backspace")press("⌫");});
+$("out").onclick=()=>{try{sessionStorage.removeItem("nav_adm");}catch(e){}location.reload();};
+try{if(sessionStorage.getItem("nav_adm")==="1")setTimeout(open_,0);}catch(e){}
+
+/* --- app --- */
+function open_(){$("lock").classList.add("hide");$("app").classList.remove("hide");load();}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id==="p-"+t.dataset.p));setTimeout(grow,30);});
+function esc(x){return String(x).replace(/[<>&"]/g,"");}
+function bars(o){const e=Object.entries(o||{}).sort((a,b)=>b[1]-a[1]).slice(0,8),m=Math.max(1,...e.map(x=>x[1]));return e.length?e.map(([k,v])=>'<div class="row"><span>'+esc(k)+'</span><div class="bar"><i data-w="'+(v/m*100)+'"></i></div><span>'+v+'</span></div>').join(""):'<p class="note">अभी कोई डेटा नहीं</p>';}
+function grow(){document.querySelectorAll(".bar i[data-w]").forEach(i=>{i.style.width=i.dataset.w+"%";});document.querySelectorAll(".days i[data-h]").forEach(i=>{i.style.height=i.dataset.h+"%";});}
+function load(){let S={};try{S=JSON.parse(localStorage.getItem("nav_stats")||"{}");}catch(e){}
+ const t=new Date().toISOString().slice(0,10),dv=S.device||{},ds=[];for(let i=6;i>=0;i--){const d=new Date(Date.now()-i*864e5),k=d.toISOString().slice(0,10);ds.push([k.slice(5),(S.days||{})[k]||0]);}const mx=Math.max(1,...ds.map(x=>x[1]));
+ $("real").innerHTML='<div class="kpis"><div class="kpi"><b>'+(S.visits||0)+'</b>कुल विज़िट</div><div class="kpi"><b>'+((S.days||{})[t]||0)+'</b>आज</div><div class="kpi"><b>'+(dv.mobile||0)+'/'+(dv.desktop||0)+'</b>मोबाइल/डेस्कटॉप</div></div><h2 style="margin:16px 0 4px;font-size:14px;color:#ffc23c">पिछले 7 दिन</h2><div class="days">'+ds.map(x=>'<div><i data-h="'+(x[1]/mx*100)+'" style="height:0"></i><span>'+x[1]+'<br>'+x[0]+'</span></div>').join("")+'</div><h2 style="margin:16px 0 4px;font-size:14px;color:#ffc23c">सबसे ज़्यादा देखे गए हिस्से</h2>'+bars(S.pages)+'<h2 style="margin:16px 0 4px;font-size:14px;color:#ffc23c">इस्तेमाल हुए फ़ीचर</h2>'+bars(S.features)+'<h2 style="margin:16px 0 4px;font-size:14px;color:#ffc23c">वीडियो प्ले</h2>'+bars(S.videos);
+ setTimeout(grow,60);global();}
+$("reset").onclick=()=>{if(confirm("इस फ़ोन की गिनती रीसेट करें?")){try{localStorage.removeItem("nav_stats");}catch(e){}load();}};
+$("mk").onclick=()=>{const v=$("np").value.trim();if(!/^\d{4,8}$/.test(v)){alert("4 से 8 अंक डालें");return;}if(v.length!==4){alert("अभी लॉक स्क्रीन 4 अंक का है — 4 अंक का PIN चुनें");return;}const p=$("ph");p.textContent='const PIN_HASH="'+hp(v)+'";';p.classList.remove("hide");};
+
+function global(){const g=(window.NAV_CFG&&window.NAV_CFG.goat||"").trim(),b=$("rvb");
+ const setup='<div class="kpis"><div class="kpi"><b>—</b>Unique visitors</div><div class="kpi"><b>—</b>Page views</div><div class="kpi"><b>—</b>आज</div></div><p class="note" style="margin-top:12px">सबके असली आँकड़े अभी चालू नहीं हैं। मुफ़्त और बिना कुकी वाला GoatCounter लगाना है:</p><ol><li><a href="https://www.goatcounter.com" target="_blank" rel="noopener">goatcounter.com</a> पर साइन-अप करें और अपना कोड चुनें (जैसे <code>mygaon</code>)।</li><li>Settings में <b>Allow adding visitor counts on your website</b> चालू करें।</li><li><code>config.js</code> में <code>goat:"mygaon"</code> लिखें और साइट दोबारा अपलोड करें।</li></ol>';
+ if(!/^[a-z0-9-]{2,40}$/i.test(g)){b.innerHTML=setup;return;}
+ b.textContent="लोड हो रहा है…";
+ fetch("https://"+g+".goatcounter.com/counter/TOTAL.json").then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{b.innerHTML='<div class="kpis"><div class="kpi"><b>'+esc(j.count_unique||"—")+'</b>Unique visitors</div><div class="kpi"><b>'+esc(j.count||"—")+'</b>Page views</div><div class="kpi"><b>✓</b>चालू</div></div><p class="note" style="margin-top:12px">रोज़ के आँकड़े, देश और डिवाइस का पूरा डैशबोर्ड: <a href="https://'+g+'.goatcounter.com" target="_blank" rel="noopener">'+g+'.goatcounter.com</a> (अपने लॉगिन से)</p>';}).catch(()=>{b.innerHTML='नंबर नहीं मिले। GoatCounter Settings में <b>Allow adding visitor counts</b> चालू है? पूरा डैशबोर्ड: <a href="https://'+g+'.goatcounter.com" target="_blank" rel="noopener">'+g+'.goatcounter.com</a>';});}
+</script></body></html>
