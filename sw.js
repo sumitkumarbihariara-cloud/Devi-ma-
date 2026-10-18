@@ -1,5 +1,5 @@
 const C="navratri-v9";
-const SHELL=["./","index.html","manifest.webmanifest","config.js","assets/icons/icon-192.png","assets/icons/icon-512.png"];
+const SHELL=["./","index.html","manifest.webmanifest","config.js","icons/icon-192.png","icons/icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()).catch(()=>{}));});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});
 self.addEventListener("fetch",e=>{const r=e.request;if(r.method!=="GET")return;const u=new URL(r.url);

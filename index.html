@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi"><head><meta charset="utf-8"><script src="config.js"></script><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1d0710"><link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<html lang="hi"><head><meta charset="utf-8"><script src="config.js"></script><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1d0710"><link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Navratri Pandal 3D</title>
 <style>
@@ -296,7 +296,7 @@ $("bView").onclick=()=>{viewMode=1-viewMode;$("dcard").style.display="none";darI
 $("bDiya").onclick=()=>{addDiya();addDiya();bell();toast(T[L].diyaT);};
 $("bFlower").onclick=()=>{burst();toast(T[L].gaya);};
 $("bBell").onclick=()=>{bell();toast(T[L].jai);};
-const SONGS=[["assets/audio/song1.mp3","हमरी अँगनवा · Hamari Anganawa"],["assets/audio/song2.mp3","शीतली मईया चलली · Shitali Maiyaa Chalali"]];
+const SONGS=[["audio/song1.mp3","हमरी अँगनवा · Hamari Anganawa"],["audio/song2.mp3","शीतली मईया चलली · Shitali Maiyaa Chalali"]];
 const bgm=$("bgm");let bgmOK=true,sgI=0,sgFail=0;bgm.volume=.6;bgm.src=SONGS[0][0];
 function sgLoad(i,play){sgI=(i+SONGS.length)%SONGS.length;bgm.src=SONGS[sgI][0];if(play){const q=bgm.play();if(q&&q.catch)q.catch(()=>{});toast("🎵 "+SONGS[sgI][1]);}}
 bgm.addEventListener("playing",()=>{sgFail=0;});
@@ -344,7 +344,7 @@ function setMenu(o){menuOpen=o;const m=$("menu");m.classList.toggle("open",o);[.
 $("master").onclick=()=>{A();setMenu(!menuOpen);};
 cv.addEventListener("pointerdown",()=>{if(menuOpen)setMenu(false);});
 ["bView","bDays","bAarti","bVid","bVill","bDar","bHome","bToday","bPush","bWalk","bAartiT","bJap","bGuide","bGarba","bWx","bRoom","bWall"].forEach(id=>$(id).addEventListener("click",()=>setMenu(false)));
-/* ---------- Videos (files live in assets/videos/) ---------- */
+/* ---------- Videos (files live in videos/) ---------- */
 const VC="By: ai.art.shiva / Kamal Pathak | All Rights Reserved (2026)",VD="Created by di_vine_art. All rights reserved.",VO="Credit: original creator, as shown in the video.";
 const V=[
 {k:"aigiri-nandini",big:1,t:["अइगिरि नंदिनी","Aigiri Nandini"],s:["माँ दुर्गा दर्शन","Featured Maa Durga darshan"],c:VC},
@@ -358,8 +358,8 @@ const V=[
 {k:"angana-padharo-maharani",t:["अंगना पधारो महारानी","Angana Padharo Maharani"],s:["स्वागत वीडियो","Welcome video"],c:VC}];
 function openVids(key){const l=$("vl"),i=L==="hi"?0:1;closeVids(true);l.innerHTML="";
  V.forEach(v=>{const c=document.createElement("div");c.className="vc"+(v.big?" big":"");c.dataset.k=v.k;c.innerHTML="<h3>"+v.t[i]+"</h3><p>"+v.s[i]+"</p>";
-  const vd=document.createElement("video");vd.controls=true;vd.playsInline=true;vd.preload="metadata";vd.poster="assets/images/"+v.k+".jpg";vd.src="assets/videos/"+v.k+".mp4";
-  const er=document.createElement("div");er.className="ve";er.style.display="none";er.textContent=(i?"Video not found: ":"वीडियो नहीं मिला: ")+"assets/videos/"+v.k+".mp4";
+  const vd=document.createElement("video");vd.controls=true;vd.playsInline=true;vd.preload="metadata";vd.poster="images/"+v.k+".jpg";vd.src="videos/"+v.k+".mp4";
+  const er=document.createElement("div");er.className="ve";er.style.display="none";er.textContent=(i?"Video not found: ":"वीडियो नहीं मिला: ")+"videos/"+v.k+".mp4";
   vd.addEventListener("error",()=>{vd.style.display="none";er.style.display="block";});
   vd.addEventListener("play",()=>{document.querySelectorAll("#vl video").forEach(o=>{if(o!==vd)o.pause();});track("videos",v.k);playingVids.add(vd);syncDuck();dvPause();});
   ["pause","ended","error"].forEach(ev=>vd.addEventListener(ev,()=>{playingVids.delete(vd);syncDuck();}));
@@ -371,7 +371,7 @@ function closeVids(keep){document.querySelectorAll("#vl video").forEach(v=>{v.pa
 document.addEventListener("visibilitychange",()=>{if(document.hidden)document.querySelectorAll("video").forEach(v=>v.pause());});
 $("bVid").onclick=()=>openVids();$("vx").onclick=()=>closeVids();
 /* ---------- Intro ---------- */
-const iv=$("iv");iv.src="assets/videos/angana-padharo-maharani.mp4";iv.addEventListener("error",()=>{iv.style.display="none";});const ip0=iv.play();if(ip0&&ip0.catch)ip0.catch(()=>{});
+const iv=$("iv");iv.src="videos/angana-padharo-maharani.mp4";iv.addEventListener("error",()=>{iv.style.display="none";});const ip0=iv.play();if(ip0&&ip0.catch)ip0.catch(()=>{});
 function endIntro(music){const n=$("intro");n.style.opacity=0;n.style.pointerEvents="none";setTimeout(()=>{n.style.display="none";iv.pause();iv.removeAttribute("src");iv.load();},800);if(music&&!musicOn)startMusic();}
 $("iGo").onclick=()=>endIntro(true);$("iSkip").onclick=()=>endIntro(false);
 
@@ -437,7 +437,7 @@ function makePandal(i){let MT=null,POSTER=null;const n=DAR[i],col=PCOL[i],g=new 
  const im=PIDOL[i].img;
  if(im){const H=3.5,W=H*9/16;add(new THREE.Mesh(new THREE.BoxGeometry(W+.3,H+.3,.12),gold),0,2.65,-2.1);
   const mt=new THREE.MeshBasicMaterial({color:0x553344});MT=mt;add(new THREE.Mesh(new THREE.PlaneGeometry(W,H),mt),0,2.65,-2.03);
-  new THREE.TextureLoader().load("assets/images/"+im+".jpg",t=>{POSTER=t;if(!mt.userData.live){mt.map=t;mt.color.set(0xffffff);mt.needsUpdate=true;}});}
+  new THREE.TextureLoader().load("images/"+im+".jpg",t=>{POSTER=t;if(!mt.userData.live){mt.map=t;mt.color.set(0xffffff);mt.needsUpdate=true;}});}
  else{const H=3.2;add(new THREE.Mesh(new THREE.PlaneGeometry(H*PH.trad.ar,H),new THREE.MeshBasicMaterial({map:idolTex,transparent:true,alphaTest:.04,side:THREE.DoubleSide})),0,.8+H/2,-2.05);}
  const dbl={side:THREE.DoubleSide};
  if(i===0){/* Shailputri: snow-peak tiers + mountains */
@@ -483,7 +483,7 @@ for(let i=0;i<DAR.length;i++)makePandal(i);
 V.filter(v=>v.k!=="angana-padharo-maharani").forEach((v,i)=>{const side=i%2?1:-1,z=16+(i>>1)*7,gg=new THREE.Group();
  const fr=new THREE.Mesh(new THREE.BoxGeometry(1.9,3.2,.12),M(0xffc23c,{metalness:.6,roughness:.35}));fr.position.y=2.5;gg.add(fr);
  const mat=new THREE.MeshBasicMaterial({color:0x553344});const pic=new THREE.Mesh(new THREE.PlaneGeometry(1.6,2.84),mat);pic.position.set(0,2.5,.07);gg.add(pic);
- new THREE.TextureLoader().load("assets/images/"+v.k+".jpg",t=>{mat.map=t;mat.color.set(0xffffff);mat.needsUpdate=true;});
+ new THREE.TextureLoader().load("images/"+v.k+".jpg",t=>{mat.map=t;mat.color.set(0xffffff);mat.needsUpdate=true;});
  fr.userData.vid=v.k;pic.userData.vid=v.k;frameHits.push(fr,pic);
  const ps=new THREE.Mesh(new THREE.CylinderGeometry(.06,.08,1.1,8),M(0x7a1230));ps.position.y=.55;gg.add(ps);
  const gl=new THREE.Sprite(new THREE.SpriteMaterial({map:glowT,color:0xffc060,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:.55}));gl.scale.set(4.2,5,1);gl.position.set(0,2.5,-.1);gg.add(gl);
@@ -514,7 +514,7 @@ async function drawCard(name){const c=$("pjc"),g=c.getContext("2d"),W=c.width=72
  const gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,"#5a0f26");gr.addColorStop(1,"#1d0710");g.fillStyle=gr;g.fillRect(0,0,W,H);
  for(let i=0;i<70;i++){g.globalAlpha=.5;g.fillStyle=i%2?"#ff8a00":"#ffc800";g.beginPath();g.arc(Math.random()*W,Math.random()*H,4+Math.random()*7,0,7);g.fill();}g.globalAlpha=1;
  g.strokeStyle="#ffc23c";g.lineWidth=6;rr(g,18,18,W-36,H-36,36);g.stroke();
- const key=(darI>=0&&PIDOL[darI].img)?"assets/images/"+PIDOL[darI].img+".jpg":null;
+ const key=(darI>=0&&PIDOL[darI].img)?"images/"+PIDOL[darI].img+".jpg":null;
  try{const im=await loadImg(key||PH.trad.src),hh=key?620:540,ww=im.width/im.height*hh;g.drawImage(im,(W-ww)/2,150,ww,hh);}catch(e){}
  g.textAlign="center";g.fillStyle="#fff4dc";g.font="bold 56px 'Noto Sans Devanagari',sans-serif";g.fillText("जय माता दी",W/2,110);
  g.font="34px 'Noto Sans Devanagari',sans-serif";g.fillStyle="#ffc23c";g.fillText("माँ दुर्गा को पुष्पांजलि",W/2,830);
@@ -586,7 +586,7 @@ function walkCam(t){if(!WALK.on)return false;if(WLT<0)WLT=t;const dt=Math.min(.0
 const DV=document.createElement("video");DV.muted=true;DV.loop=true;DV.playsInline=true;DV.setAttribute("playsinline","");DV.preload="auto";
 let dvI=-1,dvTex=null;
 function darVideoOn(i){darVideoOff();const d=PIDOL[i];if(!d.vid)return;const p=pandals[i];if(!p.mt)return;dvI=i;p.mt.userData.live=1;
- DV.src="assets/videos/"+d.vid+".mp4";const q=DV.play();if(q&&q.catch)q.catch(()=>{});
+ DV.src="videos/"+d.vid+".mp4";const q=DV.play();if(q&&q.catch)q.catch(()=>{});
  DV.onloadeddata=()=>{if(dvI!==i)return;const tx=new THREE.VideoTexture(DV);tx.minFilter=THREE.LinearFilter;tx.magFilter=THREE.LinearFilter;tx.format=THREE.RGBFormat;p.mt.map=tx;p.mt.color.set(0xffffff);p.mt.needsUpdate=true;dvTex=tx;};}
 function darVideoOff(){if(dvI<0)return;const p=pandals[dvI];if(p&&p.mt){p.mt.userData.live=0;if(p.poster){p.mt.map=p.poster;p.mt.needsUpdate=true;}}if(dvTex){dvTex.dispose();dvTex=null;}DV.onloadeddata=null;DV.pause();DV.removeAttribute("src");DV.load();dvI=-1;}
 function dvPause(){if(dvI>=0)DV.pause();}
@@ -1058,7 +1058,7 @@ function boothCard(c,snap,o){const g=c.getContext("2d"),W=c.width=720,H=c.height
  if(o.style===0){cover(snap,0,0,W,H);const gr=g.createLinearGradient(0,H*.55,0,H);gr.addColorStop(0,"rgba(29,7,16,0)");gr.addColorStop(1,"rgba(29,7,16,.88)");g.fillStyle=gr;g.fillRect(0,H*.55,W,H*.45);
   return loadImg(PH.cute.src).then(im=>{const hh=640,ww=im.width/im.height*hh;g.drawImage(im,W-ww+30,H-hh-120,ww,hh);}).catch(()=>{}).then(()=>{fin();g.fillStyle="#ffc23c";g.font="bold 56px 'Noto Sans Devanagari',sans-serif";g.shadowColor="#000";g.shadowBlur=8;g.fillText("जय माता दी",W/2,120);g.shadowBlur=0;
    g.fillStyle="#fff4dc";g.font="bold 44px 'Noto Sans Devanagari',sans-serif";g.fillText(o.name||"",W/2,H-110,W-120);g.fillStyle="#ffc23c";g.font="26px sans-serif";g.fillText("Navratri "+new Date().getFullYear()+" · "+new Date().toLocaleDateString("en-IN"),W/2,H-62);});}
- const src=PIDOL[o.pi]&&PIDOL[o.pi].img?"assets/images/"+PIDOL[o.pi].img+".jpg":null;
+ const src=PIDOL[o.pi]&&PIDOL[o.pi].img?"images/"+PIDOL[o.pi].img+".jpg":null;
  return (src?loadImg(src):Promise.reject()).catch(()=>null).then(im=>{if(im){cover(im,0,0,W,H);g.fillStyle="rgba(29,7,16,.55)";g.fillRect(0,0,W,H);}else{const gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,"#5a0f26");gr.addColorStop(1,"#1d0710");g.fillStyle=gr;g.fillRect(0,0,W,H);}
   const x=110,y=190,w=500,h=700,r=250;g.save();g.beginPath();g.moveTo(x,y+h);g.lineTo(x,y+r);g.arc(x+w/2,y+r,r,Math.PI,0);g.lineTo(x+w,y+h);g.closePath();g.clip();cover(snap,x,y,w,h);g.restore();
   g.strokeStyle="#ffc23c";g.lineWidth=10;g.beginPath();g.moveTo(x,y+h);g.lineTo(x,y+r);g.arc(x+w/2,y+r,r,Math.PI,0);g.lineTo(x+w,y+h);g.closePath();g.stroke();
